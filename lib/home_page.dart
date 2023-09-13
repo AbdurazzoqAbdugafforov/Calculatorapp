@@ -1,5 +1,7 @@
-import 'Calculator_page.dart';
 import 'package:flutter/material.dart';
+
+import 'Calculator_page.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -22,6 +24,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _addArithmetic(String action) {
+    if (_text.contains('+') ||
+        _text.contains('-') ||
+        _text.contains('*') ||
+        _text.contains('/')) {
+      _calculate();
+      setState(() {
+        _text = '$_text$action';
+      });
+      return;
+    }
     setState(() {
       _text = '$_text$action';
     });
@@ -31,31 +43,47 @@ class _HomePageState extends State<HomePage> {
     if (_text.contains('+')) {
       /// '784983+4873857
       double firstNumber = double.parse(_text.substring(0, _text.indexOf('+')));
-      double secondNumber =
-          double.parse(_text.substring(_text.indexOf('+') + 1, _text.length));
+      double? secondNumber = double.tryParse(
+          _text.substring(_text.indexOf('+') + 1, _text.length));
       setState(() {
-        _text = '${firstNumber + secondNumber}';
+        if (secondNumber != null) {
+          _text = '${firstNumber + secondNumber}';
+        } else {
+          _text = '$firstNumber';
+        }
       });
     } else if (_text.contains('-')) {
       double firstNumber = double.parse(_text.substring(0, _text.indexOf('-')));
-      double secondNumber =
-          double.parse(_text.substring(_text.indexOf('-') + 1, _text.length));
+      double? secondNumber =
+      double.tryParse(_text.substring(_text.indexOf('-') + 1, _text.length));
       setState(() {
-        _text = '${firstNumber - secondNumber}';
+        if (secondNumber != null) {
+          _text = '${firstNumber - secondNumber}';
+        } else {
+          _text = '$firstNumber';
+        }
       });
     } else if (_text.contains('/')) {
       double firstNumber = double.parse(_text.substring(0, _text.indexOf('/')));
-      double secondNumber =
-          double.parse(_text.substring(_text.indexOf('/') + 1, _text.length));
+      double? secondNumber =
+      double.tryParse(_text.substring(_text.indexOf('/') + 1, _text.length));
       setState(() {
-        _text = '${firstNumber / secondNumber}';
+        if (secondNumber != null) {
+          _text = '${firstNumber / secondNumber}';
+        } else {
+          _text = '$firstNumber';
+        }
       });
     } else if (_text.contains('*')) {
       double firstNumber = double.parse(_text.substring(0, _text.indexOf('*')));
-      double secondNumber =
-          double.parse(_text.substring(_text.indexOf('*') + 1, _text.length));
+      double? secondNumber =
+      double.tryParse(_text.substring(_text.indexOf('*') + 1, _text.length));
       setState(() {
-        _text = '${firstNumber * secondNumber}';
+        if (secondNumber != null) {
+          _text = '${firstNumber * secondNumber}';
+        } else {
+          _text = '$firstNumber';
+        }
       });
     }
   }
