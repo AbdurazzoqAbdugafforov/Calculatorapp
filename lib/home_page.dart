@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'Calculator_page.dart';
-
+import 'commonbutton.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,6 +10,72 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String _text = '';
+
+  void _addPoint() {
+    if (_text.endsWith('.')) {
+      return;
+    }
+    if (_text.contains('+')) {
+      if (_text.endsWith('+')) {
+        setState(() {
+          _text = '${_text}0.';
+        });
+        return;
+      } else {
+        final String secondNum =
+            _text.substring(_text.indexOf('+') + 1, _text.length);
+        if (secondNum.contains('.')) {
+          return;
+        }
+      }
+    } else if (_text.contains('-')) {
+      if (_text.endsWith('-')) {
+        setState(() {
+          _text = '${_text}0.';
+        });
+        return;
+      } else {
+        final String secondNum =
+            _text.substring(_text.indexOf('-') + 1, _text.length);
+        if (secondNum.contains('.')) {
+          return;
+        }
+      }
+    } else if (_text.contains('*')) {
+      if (_text.endsWith('*')) {
+        setState(() {
+          _text = '${_text}0.';
+        });
+        return;
+      } else {
+        final String secondNum =
+            _text.substring(_text.indexOf('*') + 1, _text.length);
+        if (secondNum.contains('.')) {
+          return;
+        }
+      }
+    } else if (_text.contains('/')) {
+      if (_text.endsWith('/')) {
+        setState(() {
+          _text = '${_text}0.';
+        });
+        return;
+      } else {
+        final String secondNum =
+            _text.substring(_text.indexOf('/') + 1, _text.length);
+        if (secondNum.contains('.')) {
+          return;
+        }
+      }
+    } else {
+      if (_text.contains('.')) {
+        return;
+      }
+    }
+    setState(() {
+      _text = '$_text.';
+    });
+  }
 
   void _addNumber(int number) {
     setState(() {
@@ -54,8 +118,8 @@ class _HomePageState extends State<HomePage> {
       });
     } else if (_text.contains('-')) {
       double firstNumber = double.parse(_text.substring(0, _text.indexOf('-')));
-      double? secondNumber =
-      double.tryParse(_text.substring(_text.indexOf('-') + 1, _text.length));
+      double? secondNumber = double.tryParse(
+          _text.substring(_text.indexOf('-') + 1, _text.length));
       setState(() {
         if (secondNumber != null) {
           _text = '${firstNumber - secondNumber}';
@@ -65,8 +129,8 @@ class _HomePageState extends State<HomePage> {
       });
     } else if (_text.contains('/')) {
       double firstNumber = double.parse(_text.substring(0, _text.indexOf('/')));
-      double? secondNumber =
-      double.tryParse(_text.substring(_text.indexOf('/') + 1, _text.length));
+      double? secondNumber = double.tryParse(
+          _text.substring(_text.indexOf('/') + 1, _text.length));
       setState(() {
         if (secondNumber != null) {
           _text = '${firstNumber / secondNumber}';
@@ -76,8 +140,8 @@ class _HomePageState extends State<HomePage> {
       });
     } else if (_text.contains('*')) {
       double firstNumber = double.parse(_text.substring(0, _text.indexOf('*')));
-      double? secondNumber =
-      double.tryParse(_text.substring(_text.indexOf('*') + 1, _text.length));
+      double? secondNumber = double.tryParse(
+          _text.substring(_text.indexOf('*') + 1, _text.length));
       setState(() {
         if (secondNumber != null) {
           _text = '${firstNumber * secondNumber}';
@@ -92,19 +156,17 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Simple Calculator'),
+        title: const Text('Simple Calculator'),
       ),
       body: Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         child: Column(
           children: [
-            SizedBox(
-              height: 100,
-            ),
+            const SizedBox(height: 100),
             Container(
               height: 85,
               width: 400,
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               alignment: Alignment.centerRight,
               decoration: BoxDecoration(
                   color: Colors.grey,
@@ -115,7 +177,7 @@ class _HomePageState extends State<HomePage> {
                 style: const TextStyle(fontSize: 16),
               ),
             ),
-            SizedBox(height: 100),
+            const SizedBox(height: 100),
             Row(
               children: [
                 CommonButton(
@@ -124,7 +186,7 @@ class _HomePageState extends State<HomePage> {
                     _addNumber(7);
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 CommonButton(
@@ -133,14 +195,14 @@ class _HomePageState extends State<HomePage> {
                     _addNumber(8);
                   },
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 CommonButton(
                   text: '9',
                   onTap: () {
                     _addNumber(9);
                   },
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 CommonButton(
                   text: '/',
                   onTap: () {
@@ -149,7 +211,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               children: [
                 CommonButton(
@@ -158,21 +220,21 @@ class _HomePageState extends State<HomePage> {
                     _addNumber(4);
                   },
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 CommonButton(
                   text: '5',
                   onTap: () {
                     _addNumber(5);
                   },
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 CommonButton(
                   text: '6',
                   onTap: () {
                     _addNumber(6);
                   },
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 CommonButton(
                   text: '*',
                   onTap: () {
@@ -181,7 +243,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(
@@ -192,21 +254,21 @@ class _HomePageState extends State<HomePage> {
                     _addNumber(1);
                   },
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 CommonButton(
                   text: '2',
                   onTap: () {
                     _addNumber(2);
                   },
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 CommonButton(
                   text: '3',
                   onTap: () {
                     _addNumber(3);
                   },
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 CommonButton(
                   text: '-',
                   onTap: () {
@@ -215,23 +277,23 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               children: [
                 CommonButton(
                   text: '.',
                   onTap: () {
-                    _addArithmetic('.');
+                    _addPoint();
                   },
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 CommonButton(
                   text: '0',
                   onTap: () {
                     _addNumber(0);
                   },
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 CommonButton(
                   text: 'CLR',
                   onTap: () {
@@ -240,7 +302,7 @@ class _HomePageState extends State<HomePage> {
                     });
                   },
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 CommonButton(
                   text: '+',
                   onTap: () {
@@ -249,10 +311,10 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(400, 60),
+                minimumSize: const Size(400, 60),
                 backgroundColor: Colors.deepPurple,
               ),
               onPressed: () {
