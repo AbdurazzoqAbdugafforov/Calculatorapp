@@ -9,7 +9,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String _text = '';
+  String _text = '0';
 
   void _addPoint() {
     if (_text.endsWith('.')) {
